@@ -25,9 +25,9 @@ ggplot(PCA_scores[,1:2], aes(x=PC1, y=PC2, shape=class, color=class)) +geom_poin
 #COmparing PCA and URF
 Iris.urf <- randomForest(data2)
 crowsD<-nrow(Iris.urf$proximity)
-R = do.call(cbind, rep(list(rowMeans(Boston.urf$proximity)), crowsD))
-C = do.call(cbind, rep(list(colMeans(Boston.urf$proximity)), crowsD))
-Doublecenter <-Iris$proximity-M-R-mean(Boston.urf$proximity[])
+R = do.call(cbind, rep(list(rowMeans(Iris.urf$proximity)), crowsD))
+C = do.call(cbind, rep(list(colMeans(Iris.urf$proximity)), crowsD))
+Doublecenter <-Iris.urf$proximity-C-R+mean(Iris.urf$proximity)
 PCA_URF<-prcomp(Doublecenter)
 scores<-data.frame(PCA_URF$x[,1:2])
 ggplot(scores[,1:2], aes(x=PC1, y=PC2, shape=class, color=class)) + geom_point()

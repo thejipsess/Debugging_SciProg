@@ -4,18 +4,25 @@ library(randomForest)
 library(ROCR)
 library(MASS)
 library(ggplot2)
-#Scaling of the data (iris data with 4 variables and 3 classes)
-scale_iris<-scale(iris[,1:4], center = TRUE, scale = TRUE)
-data2 <- log10(scale_iris[,1:4])
-class<-iris[,5]
-#PCA analysis
 
-pca<-prcomp(data2,center = TRUE,scale. = TRUE)
+#Scaling of the data (iris data with 4 variables and 3 classes)
+data2<-scale(iris[,1:4], center = TRUE, scale = TRUE)
+#data2 <- log10(data2[,1:4])
+class<-iris[,5]
+
+#PCA analysis
+pca<-prcomp(data2,center = FALSE,scale. = FALSE)
+
+
 #calculating %variance
-variance_PC<-100*pca$sdev^2/sum(pca$sdev)
+variance_PC<-100*pca$sdev^2/sum(pca$sdev^2)
+
+
 #Add plotting 
-PCA_scores<-pca$x
+PCA_scores<-data.frame(pca$x)
 ggplot(PCA_scores[,1:2], aes(x=PC1, y=PC2, shape=class, color=class)) +geom_point()
+
+
 #COmparing PCA and URF
 Iris.urf <- randomForest(data2)
 crowsD<-nrow(Iris.urf$proximity)

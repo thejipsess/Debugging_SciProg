@@ -13,7 +13,6 @@ class<-iris[,5]
 #PCA analysis
 pca<-prcomp(data2,center = FALSE,scale. = FALSE)
 
-
 #calculating %variance
 variance_PC<-100*pca$sdev^2/sum(pca$sdev^2)
 

@@ -5,12 +5,12 @@ library(ROCR)
 library(MASS)
 library(ggplot2)
 #Scaling of the data (iris data with 4 variables and 3 classes)
-scale_iris<-scale(iris[,1:4], center = TRUE, scale = TRUE)
-data2 <- log10(scale_iris[,1:4])
+data2<-scale(iris[,1:4], center = TRUE, scale = TRUE)
+#data2 <- log10(scale_iris[,1:4])
 class<-iris[,5]
 #PCA analysis
 
-pca<-prcomp(data2,center = TRUE,scale. = TRUE)
+pca<-prcomp(data2,center = TRUE,scale = TRUE)
 #calculating %variance
 variance_PC<-100*pca$sdev^2/sum(pca$sdev)
 #Add plotting 
